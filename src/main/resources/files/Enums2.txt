@@ -1,0 +1,86 @@
+### 6. **Enum and Interfaces**
+   - Enums can implement interfaces, allowing you to abstract behavior across enum constants.
+   - **Example**:
+     ```java
+     public interface Greet {
+         void sayHello();
+     }
+
+     public enum Language implements Greet {
+         ENGLISH {
+             public void sayHello() {
+                 System.out.println("Hello");
+             }
+         },
+         FRENCH {
+             public void sayHello() {
+                 System.out.println("Bonjour");
+             }
+         },
+         SPANISH {
+             public void sayHello() {
+                 System.out.println("Hola");
+             }
+         }
+     }
+     ```
+
+### 7. **Enum with Abstract Methods**
+   - You can define abstract methods in an enum and provide implementations for each constant.
+   - **Example** (as seen in traffic signals example):
+     ```java
+     public enum Shape {
+         CIRCLE {
+             @Override
+             public double area(double radius) {
+                 return Math.PI * radius * radius;
+             }
+         },
+         SQUARE {
+             @Override
+             public double area(double side) {
+                 return side * side;
+             }
+         };
+
+         public abstract double area(double dimension);
+     }
+     ```
+
+### 8. **EnumSet and EnumMap**
+   - **EnumSet**: Specialized `Set` implementation for use with enums. It's more efficient than `HashSet` for enums.
+     ```java
+     EnumSet<Day> weekend = EnumSet.of(Day.SATURDAY, Day.SUNDAY);
+     ```
+   - **EnumMap**: Specialized `Map` implementation for use with enum keys.
+     ```java
+     EnumMap<Day, String> dayMap = new EnumMap<>(Day.class);
+     dayMap.put(Day.MONDAY, "First day of the week");
+     ```
+
+### 9. **Enum Values and ValueOf Methods**
+   - The `values()` method returns an array of all enum constants, and `valueOf()` converts a string to the corresponding enum constant.
+   - **Example**:
+     ```java
+     Day[] days = Day.values();
+     Day day = Day.valueOf("MONDAY");
+     ```
+
+### 10. **Switch Statement with Enum**
+   - You can use enums in switch-case statements for concise code.
+   - **Example**:
+     ```java
+     Day day = Day.MONDAY;
+
+     switch (day) {
+         case MONDAY:
+             System.out.println("Start of the week!");
+             break;
+         case FRIDAY:
+             System.out.println("End of the workweek!");
+             break;
+         default:
+             System.out.println("Middle of the week.");
+     }
+     ```
+

@@ -1,0 +1,29 @@
+11. Enum Comparison
+   - Enums are compared using the `==` operator, as they are single instances (singletons).
+   - Example:
+     java
+     Day day1 = Day.MONDAY;
+     Day day2 = Day.MONDAY;
+     System.out.println(day1 == day2);  // true
+
+
+12. Serialization of Enums
+   - Enums are inherently serializable. The Java runtime takes care of serializing enum constants in a consistent way.
+   - Note: No need to implement `Serializable` interface explicitly.
+
+13. Enum Constructor Restrictions
+   - Enum constructors are always `private`, even if you don't explicitly define them as `private`. You cannot create new instances of enums outside the enum class.
+
+14. Enum in Switch Expression (Java 14+)
+   - With Java 14+, you can use enums with the new `switch` expression for a more concise way to handle cases.
+   - Example:
+     java
+     String message = switch (day) {
+         case MONDAY -> "Start of the week!";
+         case FRIDAY -> "End of the workweek!";
+         default -> "Middle of the week.";
+     };
+
+
+15. Enum Reflection
+   - Enums can be inspected using reflection, just like any other class, allowing you to programmatically interact with the enum constants.

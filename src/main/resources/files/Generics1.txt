@@ -1,0 +1,65 @@
+1. What are Generics?
+Generics enable types (classes and methods) to operate on objects of various types while providing compile-time type safety.
+
+Real-world analogy:
+Think of a container (like a box) that can hold different types of items (e.g., books, toys, food). Without generics, you don’t know what type of item the box can hold, but with generics, you can specify the item type (e.g., Box<Book> means the box holds only books).
+
+2. Generic Classes
+Generic classes allow you to create classes that can work with any type.
+
+Real-world example:
+A Box can hold any type of item, such as books or toys.
+Code Example:
+java
+Copy code
+// Generic Box class
+class Box<T> { // 'T' is a placeholder for the type
+    private T item;
+
+    public void addItem(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return item;
+    }
+}
+
+// Using the generic class
+public class Main {
+    public static void main(String[] args) {
+        Box<String> stringBox = new Box<>(); // Box for Strings
+        stringBox.addItem("Hello, World!");
+        System.out.println(stringBox.getItem());
+
+        Box<Integer> integerBox = new Box<>(); // Box for Integers
+        integerBox.addItem(123);
+        System.out.println(integerBox.getItem());
+    }
+}
+In this example, Box<String> can only hold strings, while Box<Integer> can only hold integers. The generic class Box<T> is flexible and reusable.
+
+3. Generic Methods
+Generic methods allow you to define methods that work with different types, independent of the class they belong to.
+
+Real-world example:
+Imagine a shipping service that can ship any type of item: boxes, envelopes, or crates. The shipping service doesn’t care about the specific type of package, only that it’s something that can be shipped.
+
+Code Example:
+java
+Copy code
+// Generic method in a class
+class ShippingService {
+    public static <T> void shipItem(T item) {
+        System.out.println("Shipping item: " + item);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ShippingService.shipItem("Book");
+        ShippingService.shipItem(42);
+        ShippingService.shipItem(3.14);
+    }
+}
+Here, the method shipItem can take any type of item, and Java ensures type safety at compile time.

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Java Topic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="message-content">
+    <p>Dear <span th:text="${name}"></span>,</p>
+
+    <div class="text-content" style="font-family: inherit; font-size: inherit;">
+        <p>Hope you're doing well!</p>
+
+        <p>
+            As part of your daily Java learning series, attached is today's Core Java topic for you to explore.
+            Each day, you'll receive a new file covering different concepts in Java. We hope this helps you
+            stay consistent with your learning and deepens your understanding of Java programming.
+        </p>
+
+        <p>
+            Today’s topic is: <strong><span th:text="${topicName}"></span></strong>.
+            Make sure to go through the attached file and explore if you have any questions!
+        </p>
+
+        <p>
+            Happy learning and see you tomorrow with a new topic!
+        </p>
+    </div>
+
+    <p><br><br>Regards,<br>Cherish</p>
+</div>
+</body>
+</html>

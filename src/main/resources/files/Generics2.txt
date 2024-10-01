@@ -1,0 +1,136 @@
+Generics in Java is a powerful feature that allows you to write flexible, reusable code that can work with any type,while still maintaining type safety. To master generics, we need to understand several key concepts. Below, I’ll explain these concepts with simple real-world examples to help you gain a thorough understanding of generics.
+
+4. Bounded Type Parameters
+You can restrict the types that can be used with generics by using bounded type parameters.
+
+Real-world example:
+Imagine a ranking system that only works with comparable items (like scores or players in a game). It wouldn’t make sense to rank items that don’t have a natural order (like colors).
+
+Code Example:
+java
+Copy code
+// Bounded type parameter (only allows Comparable types)
+class Ranker<T extends Comparable<T>> {
+    public T getHigherRank(T item1, T item2) {
+        if (item1.compareTo(item2) > 0) {
+            return item1;
+        } else {
+            return item2;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Ranker<Integer> intRanker = new Ranker<>();
+        System.out.println("Higher rank: " + intRanker.getHigherRank(100, 200));
+
+        Ranker<String> stringRanker = new Ranker<>();
+        System.out.println("Higher rank: " + stringRanker.getHigherRank("Apple", "Banana"));
+    }
+}
+In this case, Ranker<T extends Comparable<T>> means that T must be a type that implements the Comparable interface (e.g., Integer, String).
+
+5. Wildcard Types (?)
+Wildcards are used when you want to work with generic types, but you don’t know or care what the exact type is.
+
+Real-world example:
+Imagine a generic printer that can print any type of item (letters, books, photos), but the printer doesn’t need to know the specific type of the item.
+
+Code Example:
+java
+Copy code
+// Wildcard for any type
+class Printer {
+    public static void printItems(Box<?> box) { // '?' represents any type
+        System.out.println("Printing: " + box.getItem());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<String> stringBox = new Box<>();
+        stringBox.addItem("Document");
+
+        Box<Integer> integerBox = new Box<>();
+        integerBox.addItem(12345);
+
+        Printer.printItems(stringBox);   // Works with Box<String>
+        Printer.printItems(integerBox);  // Works with Box<Integer>
+    }
+}
+Here, Box<?> allows the Printer to print items from any type of Box without specifying the exact type.
+
+6. Upper-Bounded Wildcards (<? extends T>)
+An upper-bounded wildcard restricts the types to be a specific type or its subclasses.
+
+Real-world example:
+Consider a zoo where you have a method to feed only animals. You can pass any subclass of Animal (like Dog, Cat, etc.), but not objects that aren’t animals.
+
+Code Example:
+java
+Copy code
+// Animal class
+class Animal {
+    public void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+// Dog class extends Animal
+class Dog extends Animal {
+    @Override
+    public void eat() {
+        System.out.println("Dog is eating");
+    }
+}
+
+// Method that works with Animal and its subclasses
+class Feeder {
+    public static void feedAnimals(Box<? extends Animal> box) {
+        box.getItem().eat();  // Calls eat() on Animal or subclass
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<Dog> dogBox = new Box<>();
+        dogBox.addItem(new Dog());
+
+        Feeder.feedAnimals(dogBox);  // Works with Box<Dog> because Dog is an Animal
+    }
+}
+Here, Box<? extends Animal> means the method can accept a Box that contains any type that is a subclass of Animal.
+
+7. Lower-Bounded Wildcards (<? super T>)
+A lower-bounded wildcard restricts the types to be a specific type or its superclasses.
+
+Real-world example:
+Imagine a donation center that accepts items to donate. The donation center can accept items that are Toy or any superclass of Toy (e.g., Product).
+
+Code Example:
+java
+Copy code
+class Product { }
+class Toy extends Product { }
+
+// Method that accepts Toy or any superclass of Toy
+class DonationCenter {
+    public static void acceptDonation(Box<? super Toy> box) {
+        System.out.println("Donation accepted: " + box.getItem());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<Product> productBox = new Box<>();
+        productBox.addItem(new Toy());  // Toy is a subclass of Product
+
+        DonationCenter.acceptDonation(productBox);
+    }
+}
+Here, Box<? super Toy> allows the method to accept a Box of Toy or any of its superclasses.
+
+
+
+Let me know if you'd like to dive deeper into any specific concept!
