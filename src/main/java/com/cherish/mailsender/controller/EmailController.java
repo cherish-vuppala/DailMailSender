@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import static org.springframework.http.HttpStatus.OK;
 
+// Added just for testing, before implementing Scheduler
 @RestController
 @RequestMapping
 public class EmailController {
